@@ -10,14 +10,14 @@ if (!empty(Router::$page_id)) {
     $query = "select
                 user_module_id
             from user_module_access
-            where user_id = " . Router::$page_id;
+            where id = " . Router::$page_id;
     $checked = $db->rawQueryValue($query);
     empty($checked) && $checked = array();
 
     $query = "select
                 data_provider_id
             from user_data_provider
-            where user_id = " . Router::$page_id;
+            where id = " . Router::$page_id;
     $user_providers = $db->rawQueryValue($query);
     empty($user_providers) && $user_providers = array();
 } else {

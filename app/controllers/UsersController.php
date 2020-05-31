@@ -16,15 +16,15 @@ class UsersController extends SecureController {
      */
     function index($fieldname = null, $fieldvalue = null) {
         $db = $this->GetModel();
-        $fields = array('user_id', 'name', 'surname', 'username', 'email', 'password_hash', 'account_status', 'role', 'date_created', 'date_modified');
+        $fields = array('id', 'name', 'surname', 'username', 'user_email', 'password_hash', 'account_status', 'role', 'created', 'modified');
         $limit = $this->get_page_limit(MAX_RECORD_COUNT); // return pagination from BaseModel Class e.g array(5,20)
         if (!empty($this->search)) {
             $text = $this->search;
-            $db->orWhere('user_id', "%$text%", 'LIKE');
+            $db->orWhere('id', "%$text%", 'LIKE');
             $db->orWhere('name', "%$text%", 'LIKE');
             $db->orWhere('surname', "%$text%", 'LIKE');
             $db->orWhere('username', "%$text%", 'LIKE');
-            $db->orWhere('email', "%$text%", 'LIKE');
+            $db->orWhere('user_email', "%$text%", 'LIKE');
             $db->orWhere('password_hash', "%$text%", 'LIKE');
             $db->orWhere('account_status', "%$text%", 'LIKE');
             $db->orWhere('role', "%$text%", 'LIKE');
@@ -32,7 +32,7 @@ class UsersController extends SecureController {
         if (!empty($this->orderby)) { // when order by request fields (from $_GET param)
             $db->orderBy($this->orderby, $this->ordertype);
         } else {
-            $db->orderBy('user_id', ORDER_TYPE);
+            $db->orderBy('id', ORDER_TYPE);
         }
         if (!empty($fieldname)) {
             $db->where($fieldname, $fieldvalue);
@@ -54,7 +54,7 @@ class UsersController extends SecureController {
         $this->view->page_title = 'System Users';
 
         if (!isset($_GET['is_ajax'])) {
-            $this->view->render('users/list.php', $data, 'main_layout_no_vue.php');
+            $this->view->render('users/list.php', $data, 'main_layout.php');
         } else {
             $this->view->render('users/list.php', $data, 'ajax_layout.php');
         }
@@ -66,7 +66,7 @@ class UsersController extends SecureController {
      */
     function view($rec_id = null, $value = null) {
         $db = $this->GetModel();
-        $fields = array('id', 'name', 'surname', 'username', 'email', 'user_password_hash', 'user_account_status', 'role', 'user_failed_logins', 'user_last_failed_login', 'created', 'last_modified');
+        $fields = array('id', 'name', 'surname', 'username', 'user_email', 'user_password_hash', 'user_account_status', 'role', 'user_failed_logins', 'user_last_failed_login', 'created', 'last_modified');
         if (!empty($value)) {
             $db->where($rec_id, urldecode($value));
         } else {
@@ -75,14 +75,14 @@ class UsersController extends SecureController {
         $record = $db->getOne('tbl_user', $fields);
         if (!empty($record)) {
             $this->view->page_title = get_lang('view_users');
-            $this->view->render('users/view.php', $record, 'main_layout_no_vue.php');
+            $this->view->render('users/view.php', $record, 'main_layout.php');
         } else {
             if ($db->getLastError()) {
                 $this->view->page_error = $db->getLastError();
             } else {
                 $this->view->page_error = get_lang('record_not_found');
             }
-            $this->view->render('users/view.php', $record, 'main_layout_no_vue.php');
+            $this->view->render('users/view.php', $record, 'main_layout.php');
         }
     }
 
@@ -102,7 +102,7 @@ class UsersController extends SecureController {
                 'name' => 'required',
                 'surname' => 'required',
                 'username' => 'required',
-                'email' => 'required|valid_email'
+                'user_email' => 'required|valid_email'
             );
 
             //Require password fields if user is new
@@ -127,7 +127,7 @@ class UsersController extends SecureController {
             $query = "SELECT * FROM `users` WHERE `username` = " . $db->escape($modeldata['username']) . "";
 
             if (!empty($rec_id)) {
-                $query .= " AND `user_id` != $rec_id";
+                $query .= " AND `id` != $rec_id";
             }
 
             if ($db->rawQuery($query)) {
@@ -135,10 +135,10 @@ class UsersController extends SecureController {
             }
 
             //Validate unique email address
-            $query = "SELECT * FROM `users` WHERE `email` = " . $db->escape($modeldata['email']) . "";
+            $query = "SELECT * FROM `users` WHERE `user_email` = " . $db->escape($modeldata['email']) . "";
 
             if (!empty($rec_id)) {
-                $query .= " AND `user_id` != $rec_id";
+                $query .= " AND `id` != $rec_id";
             }
 
             if ($db->rawQuery($query)) {
@@ -172,7 +172,7 @@ class UsersController extends SecureController {
                     'name' => $modeldata['name'],
                     'surname' => $modeldata['surname'],
                     'username' => $modeldata['username'],
-                    'email' => $modeldata['email']
+                    'user_email' => $modeldata['email']
                 );
 
 
@@ -183,12 +183,12 @@ class UsersController extends SecureController {
                 if (empty($rec_id)) {
                     $rec_id = $db->insert('users', $user_data);
                 } else {
-                    $db->where('user_id', $rec_id);
+                    $db->where('id', $rec_id);
                     $bool = $db->update('users', $user_data);
 
                     if ($bool) {
                         //Delete existing receipt items
-                        $db->where('user_id', $rec_id);
+                        $db->where('id', $rec_id);
                         $db->delete('user_module_access');
                     }
                 }
@@ -200,7 +200,7 @@ class UsersController extends SecureController {
                         if (isset($modeldata['mod_' . $module['user_module_id']])) {
                             $idata = array(
                                 'user_module_id' => $module['user_module_id'],
-                                'user_id' => $rec_id
+                                'id' => $rec_id
                             );
 
                             if (!$db->insert('user_module_access', $idata)) {
@@ -222,8 +222,8 @@ class UsersController extends SecureController {
         }
 
         if (!empty($rec_id)) {
-            $fields = array('user_id', 'name', 'surname', 'username', 'email', 'password_hash', 'account_status', 'role', 'date_created', 'date_modified');
-            $db->where('user_id', $rec_id);
+            $fields = array('id', 'name', 'surname', 'username', 'user_email', 'password_hash', 'account_status', 'role', 'created', 'modified');
+            $db->where('id', $rec_id);
             $data = $db->getOne('users', $fields);
             $this->view->page_props = $data;
             $this->view->page_title = 'Edit User';
@@ -231,7 +231,7 @@ class UsersController extends SecureController {
             $this->view->page_title = 'Add User';
         }
 
-        $this->view->render('users/add.php', null, 'main_layout_no_vue.php');
+        $this->view->render('users/add.php', null, 'main_layout.php');
     }
 
     /**
@@ -247,7 +247,7 @@ class UsersController extends SecureController {
                 'name' => 'required',
                 'surname' => 'required',
                 'username' => 'required',
-                'email' => 'required|valid_email',
+                'user_email' => 'required|valid_email',
                 'user_password_hash' => 'required',
                 'user_account_status' => 'required|numeric',
                 'role' => 'required|numeric',
@@ -279,19 +279,19 @@ class UsersController extends SecureController {
             }
         }
 
-        $fields = array('id', 'name', 'surname', 'username', 'email', 'user_password_hash', 'user_account_status', 'role', 'user_failed_logins', 'user_last_failed_login', 'created', 'last_modified');
+        $fields = array('id', 'name', 'surname', 'username', 'user_email', 'user_password_hash', 'user_account_status', 'role', 'user_failed_logins', 'user_last_failed_login', 'created', 'last_modified');
         $db->where('id', $rec_id);
         $data = $db->getOne('tbl_user', $fields);
         $this->view->page_title = get_lang('edit_users');
         if (!empty($data)) {
-            $this->view->render('users/edit.php', $data, 'main_layout_no_vue.php');
+            $this->view->render('users/edit.php', $data, 'main_layout.php');
         } else {
             if ($db->getLastError()) {
                 $this->view->page_error[] = $db->getLastError();
             } else {
                 $this->view->page_error[] = get_lang('record_not_found');
             }
-            $this->view->render('users/edit.php', $data, 'main_layout_no_vue.php');
+            $this->view->render('users/edit.php', $data, 'main_layout.php');
         }
     }
 
@@ -304,7 +304,7 @@ class UsersController extends SecureController {
         $arr_id = explode(',', $rec_ids);
 
         foreach ($arr_id as $rec_id) {
-            $db->where('user_id', $rec_id, "=", 'OR');
+            $db->where('id', $rec_id, "=", 'OR');
         }
 
         $bool = $db->delete('user_module_access');

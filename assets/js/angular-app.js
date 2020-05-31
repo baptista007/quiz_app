@@ -184,3 +184,30 @@ app.controller('dataProviderCtrl', ['$scope', '$window', function ($scope, $wind
             }
         };
 }]);
+
+app.controller('quizCtrl', ['$scope', '$window', function ($scope, $window) {
+    console.log('Logging from controller');
+    
+    $scope.questions = [];
+    
+    $scope.add = function () {
+        $scope.questions.push({
+            question: '',
+            options: []
+        });
+    };
+
+    $scope.remove = function (index) {
+        $scope.questions.splice(index, 1);
+    };
+    
+    $scope.addOption =function(index) {
+        $scope.questions[index].options.push({
+            option: ''
+        });
+    };
+    
+    $scope.removeOption = function(index, innerIndex) {
+        $scope.questions[index].options.splice(innerIndex,1);
+    };
+}]);

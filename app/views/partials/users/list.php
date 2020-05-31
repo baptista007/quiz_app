@@ -56,17 +56,17 @@ $show_pagination = $this->show_pagination;
                                                     <td> <?php echo $data['name']; ?> </td>
                                                     <td> <?php echo $data['surname']; ?> </td>
                                                     <td> <?php echo $data['username']; ?> </td>
-                                                    <td> <?php echo $data['email']; ?> </td>
-                                                    <td> <?php echo $data['date_created']; ?> </td>
-                                                    <td> <?php echo $data['date_modified']; ?> </td>
+                                                    <td> <?php echo $data['user_email']; ?> </td>
+                                                    <td> <?php echo $data['created']; ?> </td>
+                                                    <td> <?php echo $data['modified']; ?> </td>
                                                     <th class="td-btn">
                                                         <?php
                                                             if ($data['username'] != 'admin') {
                                                         ?>
-                                                        <a class="btn btn-sm btn-info has-tooltip" title="<?php print_lang('btn_edit_tooltip'); ?>" href="<?php print_link('users/add/' . $data['user_id']); ?>">
+                                                        <a class="btn btn-sm btn-info has-tooltip" title="<?php print_lang('btn_edit_tooltip'); ?>" href="<?php print_link('users/add/' . $data['id']); ?>">
                                                             <i class="fa fa-edit"></i> Edit
                                                         </a>
-                                                        <a class="btn btn-sm btn-danger recordDeletePromptAction has-tooltip" title="<?php print_lang('btn_delete_tooltip'); ?>" href="<?php print_link("users/delete/$data[user_id]"); ?>" >
+                                                        <a class="btn btn-sm btn-danger recordDeletePromptAction has-tooltip" title="<?php print_lang('btn_delete_tooltip'); ?>" href="<?php print_link("users/delete/$data[id]"); ?>" >
                                                             <i class="fa fa-times"></i>
                                                             Delete
                                                         </a>

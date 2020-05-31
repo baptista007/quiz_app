@@ -239,7 +239,7 @@ class BaseView {
     /**
      * Render Page as a Partial View Onto Another Page Using Url Parameters
      * @example call inside any view or layout 
-     * $this->render_page("users/index/status/active/?limit_start=1&limit_count=5&orderby=user_id&ordertype=desc");
+     * $this->render_page("users/index/status/active/?limit_start=1&limit_count=5&orderby=id&ordertype=desc");
      * @return null
      */
     protected function render_page($url, $view = null) {

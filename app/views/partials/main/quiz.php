@@ -10,14 +10,14 @@ if (!empty(Router::$page_id)) {
     $query = "select
                 user_module_id
             from user_module_access
-            where user_id = " . Router::$page_id;
+            where id = " . Router::$page_id;
     $checked = $db->rawQueryValue($query);
     empty($checked) && $checked = array();
 
     $query = "select
                 data_provider_id
             from user_data_provider
-            where user_id = " . Router::$page_id;
+            where id = " . Router::$page_id;
     $user_providers = $db->rawQueryValue($query);
     empty($user_providers) && $user_providers = array();
 } else {
@@ -26,7 +26,7 @@ if (!empty(Router::$page_id)) {
 }
 
 ?>
-<section class="page" ng-controller="userCtrl">
+<section class="page" ng-controller="quizCtrl">
     <?= Html::back_button(); ?>
     <div  class="">
         <div class="container-fluid">
@@ -90,15 +90,42 @@ if (!empty(Router::$page_id)) {
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="alert lead text-muted">
-                                        Questions
+                        
+                        <div>
+                            <div class="alert lead text-muted">
+                                <strong>
+                                    Questions
+                                </strong>
+                            </div>
+
+                            <div class="form-group card" ng-repeat="item in questions">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label>
+                                            Question
+                                        </label>
+                                        <div>
+                                            <input type="text" ng-model="item.question" class="form-control" />
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label>Answers</label>
+                                        <div class="input-group mb-3" ng-repeat="(key, option) in item.options">
+                                            <div class="input-group-prepend">
+                                                {{option}}
+                                            </div>
+                                            <input type="text" ng-model="option.value" class="form-control" />
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-danger" ng-click="removeOption($index)">Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-success" ng-click="addOption($index)">Add</button>
                                 </div>
                             </div>
+                            <button type="button" class="btn btn-success" ng-click="add()">Add</button>
                         </div>
+                        
                         <div class="form-group form-submit-btn-holder text-center">
                             <button class="btn btn-primary" type="submit">
                                 Submit <i class="fa fa-send"></i>

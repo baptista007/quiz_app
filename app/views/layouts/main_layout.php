@@ -190,6 +190,10 @@ $page_title = $this->get_page_title();
         Html :: page_js('jquery.form.min.js');
         Html :: page_js('autocomplete.min.js');
         Html :: page_js('custom.js');
+        
+        //Angular stuff
+        Html :: page_js('angular.min.js');
+        Html :: page_js('angular-app.js');
         ?>
         <script type="text/javascript">
             $(function () {

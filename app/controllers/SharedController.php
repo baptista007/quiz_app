@@ -437,11 +437,11 @@ class SharedController extends SecureController {
     function user_options_list() {
         $db = $this->GetModel();
         $sqltext = "SELECT 
-                        user_id as value, 
+                        id as value, 
                         CONCAT(name, ' ', surname, ' (', username, ')') as label 
                     FROM public.users 
-                    WHERE user_id NOT IN (SELECT primary_data_uploader_id FROM data_provider)
-                    AND user_id NOT IN (SELECT secondary_data_uploader_id FROM data_provider);";
+                    WHERE id NOT IN (SELECT primary_data_uploader_id FROM data_provider)
+                    AND id NOT IN (SELECT secondary_data_uploader_id FROM data_provider);";
         $arr = $db->rawQuery($sqltext);
         return $arr;
     }
@@ -523,18 +523,18 @@ class SharedController extends SecureController {
     function autocomplete() {
         $db = $this->GetModel();
         $sqltext = "SELECT 
-                        user_id as value, 
+                        id as value, 
                         CONCAT(name, ' ', surname, ' (', username, ')') as label 
                     FROM public.users 
-                    WHERE user_id in (
+                    WHERE id in (
                                         SELECT 
-                                            uma.user_id 
+                                            uma.id 
                                         FROM user_module_access uma 
                                             INNER JOIN user_module um ON uma.user_module_id = um.user_module_id 
                                         WHERE um.enum_id = " . Module::upload_provider_data . "
                                     )
-                    AND user_id NOT IN (SELECT primary_data_uploader_id FROM data_provider WHERE primary_data_uploader_id IS NOT NULL)
-                    AND user_id NOT IN (SELECT secondary_data_uploader_id FROM data_provider WHERE secondary_data_uploader_id IS NOT NULL)";
+                    AND id NOT IN (SELECT primary_data_uploader_id FROM data_provider WHERE primary_data_uploader_id IS NOT NULL)
+                    AND id NOT IN (SELECT secondary_data_uploader_id FROM data_provider WHERE secondary_data_uploader_id IS NOT NULL)";
         
         if (!empty($_GET['q'])) {
             $search_term = $_GET['q'];

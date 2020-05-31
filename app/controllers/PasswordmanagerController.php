@@ -15,10 +15,10 @@ class PasswordmanagerController extends BaseController{
 			$user = $db->getOne('UserTbl');
 			if(!empty($user)){
 				$password_reset_key=random_str();
-				$user_id = $user['ID'];
+				$id = $user['ID'];
 				
 				//Update user password reset key with new one
-				$db->where ('ID', $user_id);
+				$db->where ('ID', $id);
 				$db->update( 'UserTbl', array("password_reset_key"=>$password_reset_key) );
 				
 				$reset_link = SITE_ADDR."Passwordmanager/updatepassword/$password_reset_key";

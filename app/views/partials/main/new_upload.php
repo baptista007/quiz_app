@@ -41,7 +41,7 @@ $db = PDODb::getInstance();
                                                                 `data_provider`.provider_name as name
                                                             from `user_data_provider`
                                                                 inner join `data_provider` on `data_provider`.data_provider_id = `user_data_provider`.data_provider_id
-                                                            where user_id = " . get_active_user('user_id');
+                                                            where id = " . get_active_user('id');
                                                 $user_providers = $db->rawQuery($query);
 
 

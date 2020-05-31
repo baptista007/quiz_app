@@ -100,7 +100,7 @@ class PageAccessManager {
                         m.enum_id 
                     from user_module_access md
                         inner join user_module m on m.user_module_id = md.user_module_id
-                    where md.user_id = " . get_active_user("user_id");
+                    where md.id = " . get_active_user("id");
             $users_access = $db->rawQueryValue($query);
             empty($users_access) && $users_access = array();
             

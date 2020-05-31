@@ -165,8 +165,8 @@ class DataproviderController extends SecureController {
                     CONCAT(pu.name, ' ', pu.surname) as primary_data_uploader,
                     CONCAT(su.name, ' ', su.surname) as secondary_data_uploader
                 FROM data_provider
-                    LEFT JOIN users pu ON pu.user_id = data_provider.primary_data_uploader_id
-                    LEFT JOIN users su ON su.user_id = data_provider.secondary_data_uploader_id
+                    LEFT JOIN users pu ON pu.id = data_provider.primary_data_uploader_id
+                    LEFT JOIN users su ON su.id = data_provider.secondary_data_uploader_id
                 WHERE data_provider.data_provider_id = $rec_id";
             $data = $db->rawQueryOne($query);
             $this->view->page_props = $data;
@@ -212,8 +212,8 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
-                WHERE provider_data_upload.user_id = " . get_active_user('user_id') . "
+                    INNER JOIN users ON users.id = provider_data_upload.id
+                WHERE provider_data_upload.id = " . get_active_user('id') . "
                 AND provider_data_upload.status = " . DataUploadStatus::draft;
         $records = $db->rawQuery($query);
         
@@ -228,8 +228,8 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
-                WHERE provider_data_upload.user_id = " . get_active_user('user_id') . "
+                    INNER JOIN users ON users.id = provider_data_upload.id
+                WHERE provider_data_upload.id = " . get_active_user('id') . "
                 AND provider_data_upload.status = " . DataUploadStatus::submitted;
         $records2 = $db->rawQuery($query);
         $data->submitted = $records2;
@@ -243,8 +243,8 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
-                WHERE provider_data_upload.user_id = " . get_active_user('user_id') . "
+                    INNER JOIN users ON users.id = provider_data_upload.id
+                WHERE provider_data_upload.id = " . get_active_user('id') . "
                 AND provider_data_upload.status = " . DataUploadStatus::reviewed;
         $records3 = $db->rawQuery($query);
         $data->reviewed = $records3;
@@ -258,8 +258,8 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
-                WHERE provider_data_upload.user_id = " . get_active_user('user_id') . "
+                    INNER JOIN users ON users.id = provider_data_upload.id
+                WHERE provider_data_upload.id = " . get_active_user('id') . "
                 AND provider_data_upload.status = " . DataUploadStatus::rejected;
         $records4 = $db->rawQuery($query);
         $data->rejected = $records4;
@@ -277,8 +277,8 @@ class DataproviderController extends SecureController {
     
     function upload($rec_id = null) {
         $db = $this->GetModel();
-        $db->where('primary_data_uploader_id', get_active_user('user_id'), "=");
-        $db->where('secondary_data_uploader_id', get_active_user('user_id'), "=", 'OR');
+        $db->where('primary_data_uploader_id', get_active_user('id'), "=");
+        $db->where('secondary_data_uploader_id', get_active_user('id'), "=", 'OR');
         $provider = $db->getOne('data_provider');
         
         if (!$provider) {
@@ -297,7 +297,7 @@ class DataproviderController extends SecureController {
                     FROM provider_data_upload
                         INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                         INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                        INNER JOIN users ON users.user_id = provider_data_upload.user_id
+                        INNER JOIN users ON users.id = provider_data_upload.id
                     WHERE provider_data_upload.data_upload_id = $rec_id";
             $row = $db->rawQueryOne($query);
         }
@@ -431,7 +431,7 @@ class DataproviderController extends SecureController {
                             'csv_files' => $filenames,
                             'file_original_name' => $nice_filename,
                             'status' => (isset($modeldata['is_submit']) ? DataUploadStatus::submitted : DataUploadStatus::draft),
-                            'user_id' => get_active_user('user_id')
+                            'id' => get_active_user('id')
                         );
                         
                         if (!empty($modeldata['comments'])) {
@@ -507,7 +507,7 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
+                    INNER JOIN users ON users.id = provider_data_upload.id
                 WHERE provider_data_upload.data_upload_id = $rec_id";
         $data = $db->rawQueryOne($query);
         $this->view->page_title = 'View Uploaded Data';
@@ -547,7 +547,7 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
+                    INNER JOIN users ON users.id = provider_data_upload.id
                 WHERE provider_data_upload.status = " . DataUploadStatus::submitted;
         $records = $db->rawQuery($query);
         
@@ -574,7 +574,7 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
+                    INNER JOIN users ON users.id = provider_data_upload.id
                 WHERE provider_data_upload.status = " . DataUploadStatus::reviewed;
         $records = $db->rawQuery($query);
         
@@ -600,7 +600,7 @@ class DataproviderController extends SecureController {
                 FROM provider_data_upload
                     INNER JOIN data_provider ON data_provider.data_provider_id = provider_data_upload.data_provider_id
                     INNER JOIN indicator ON indicator.id = provider_data_upload.indicator_id
-                    INNER JOIN users ON users.user_id = provider_data_upload.user_id
+                    INNER JOIN users ON users.id = provider_data_upload.id
                 WHERE provider_data_upload.data_upload_id = $rec_id";
         $data = $db->rawQueryOne($query);
         
