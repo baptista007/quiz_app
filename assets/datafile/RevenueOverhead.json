@@ -1,0 +1,409 @@
+[
+  {
+    "name": "Year",
+    "data": [2004, 2010, 2016,2018]
+  },
+  {
+    "name":  "Total Pop (severely poor),Oshikoto",
+    "data": [24.2, 21.8, 7.8
+    ]
+  },
+  {
+    "name": "Total Pop (severely poor),Otjozondjupa",
+    "data": [ 26.5, 22.2, 11.4 ]
+  },
+  {
+    "name": "Total Pop (severely poor),Zambezi",
+    "data": [20.3, 35.2, 25.1]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),!Karas"
+    ],
+    "data": [
+      21.7,
+      16.8,
+      6.3
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Erongo"
+    ],
+    "data": [
+      8.7,
+      2.9,
+      1.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Hardap"
+    ],
+    "data": [
+      31.8,
+      15.1,
+      7.7
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango East"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      33.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango West"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      17.6
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Khomas"
+    ],
+    "data": [
+      3.7,
+      4,
+      2.2
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kunene"
+    ],
+    "data": [
+      27.2,
+      15.9,
+      25
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Ohangwena"
+    ],
+    "data": [
+      28.1,
+      11.9,
+      8.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omaheke"
+    ],
+    "data": [
+      28.1,
+      19,
+      28.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omusati"
+    ],
+    "data": [
+      17.5,
+      7.3,
+      10
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Oshana"
+    ],
+    "data": [
+      11.2,
+      7.2,
+      5.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),!Karas"
+    ],
+    "data": [
+      21.7,
+      16.8,
+      6.3
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Ohangwena"
+    ],
+    "data": [
+      28.1,
+      11.9,
+      8.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Erongo"
+    ],
+    "data": [
+      8.7,
+      2.9,
+      1.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Hardap"
+    ],
+    "data": [
+      31.8,
+      15.1,
+      7.7
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango East"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      33.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango West"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      17.6
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Khomas"
+    ],
+    "data": [
+      3.7,
+      4,
+      2.2
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kunene"
+    ],
+    "data": [
+      27.2,
+      15.9,
+      25
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Zambezi"
+    ],
+    "data": [
+      20.3,
+      35.2,
+      25.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omaheke"
+    ],
+    "data": [
+      28.1,
+      19,
+      28.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omusati"
+    ],
+    "data": [
+      17.5,
+      7.3,
+      10
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Oshana"
+    ],
+    "data": [
+      11.2,
+      7.2,
+      5.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Oshikoto"
+    ],
+    "data": [
+      24.2,
+      21.8,
+      7.8
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Otjozondjupa"
+    ],
+    "data": [
+      26.5,
+      22.2,
+      11.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango West"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      17.6
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Khomas"
+    ],
+    "data": [
+      3.7,
+      4,
+      2.2
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kunene"
+    ],
+    "data": [
+      27.2,
+      15.9,
+      25
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Ohangwena"
+    ],
+    "data": [
+      28.1,
+      11.9,
+      8.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),!Karas"
+    ],
+    "data": [
+      21.7,
+      16.8,
+      6.3
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Erongo"
+    ],
+    "data": [
+      8.7,
+      2.9,
+      1.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Hardap"
+    ],
+    "data": [
+      31.8,
+      15.1,
+      7.7
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Kavango East"
+    ],
+    "data": [
+      47.1,
+      34.6,
+      33.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omaheke"
+    ],
+    "data": [
+      28.1,
+      19,
+      28.1
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Omusati"
+    ],
+    "data": [
+      17.5,
+      7.3,
+      10
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Oshana"
+    ],
+    "data": [
+      11.2,
+      7.2,
+      5.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Oshikoto"
+    ],
+    "data": [
+      24.2,
+      21.8,
+      7.8
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Otjozondjupa"
+    ],
+    "data": [
+      26.5,
+      22.2,
+      11.4
+    ]
+  },
+  {
+    "name": [
+      "Total Pop (severely poor),Zambezi"
+    ],
+    "data": [
+      20.3,
+      35.2,
+      25.1
+    ]
+  }
+]
